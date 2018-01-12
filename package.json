@@ -1,0 +1,23 @@
+{
+  "name": "calendar-page-generator",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeorgeGorbanev/calendar-page-generator.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GeorgeGorbanev/calendar-page-generator/issues"
+  },
+  "homepage": "https://github.com/GeorgeGorbanev/calendar-page-generator#readme",
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "mocha": "^4.1.0"
+  }
+}
