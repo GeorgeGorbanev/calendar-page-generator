@@ -110,7 +110,7 @@ describe('CalendarPage', function() {
       });
 
       it('memoized for page', function() {
-        assert.equal(previousPage === previousPage, true);
+        assert.equal(page.previousPage() === previousPage, true);
       });
 
       describe('#allDates', function() {
@@ -132,6 +132,40 @@ describe('CalendarPage', function() {
         it('with last element date is 2018-02-04', function() {
           const lastDateFormated = dates[dates.length - 1].toISOString().slice(0, 10);
           assert.equal(lastDateFormated, '2018-02-04');
+        });
+      });
+    });
+
+    describe('#nextPage', function() {
+      const nextPage = page.nextPage();
+
+      it('is CalendarPage', function() {
+        assert.equal(nextPage instanceof CalendarPage, true);
+      });
+
+      it('memoized for page', function() {
+        assert.equal(page.nextPage() === nextPage, true);
+      });
+
+      describe('#allDates', function() {
+        const dates = nextPage.allDates;
+
+        it('is Array', function() {
+          assert.equal(Array.isArray(dates), true);
+        });
+
+        it('with length 35', function() {
+          assert.equal(dates.length, 35);
+        });
+
+        it('with first element date is 2018-02-26', function() {
+          const firstDateFormated = dates[0].toISOString().slice(0, 10);
+          assert.equal(firstDateFormated, '2018-02-26');
+        });
+
+        it('with last element date is 2018-04-01', function() {
+          const lastDateFormated = dates[dates.length - 1].toISOString().slice(0, 10);
+          assert.equal(lastDateFormated, '2018-04-01');
         });
       });
     });

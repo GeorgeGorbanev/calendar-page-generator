@@ -81,6 +81,21 @@ class CalendarPage {
     this.memo['previousPage'] = new CalendarPage(initDate);
     return this.memo['previousPage'];
   }
+
+  nextPage () {
+    const memoized = this.memo['nextPage'];
+
+    if (typeof memoized !== 'undefined') {
+      return memoized;
+    }
+
+    let initDate = new Date(this.initDate);
+    let currentMonth = initDate.getMonth();
+    initDate.setMonth(currentMonth + 1);
+
+    this.memo['nextPage'] = new CalendarPage(initDate);
+    return this.memo['nextPage'];
+  }
 }
 
 module.exports = CalendarPage;
