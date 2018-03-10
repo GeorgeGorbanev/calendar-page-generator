@@ -101,5 +101,39 @@ describe('CalendarPage', function() {
         assert.equal(lastDateFormated, '2018-03-04');
       });
     });
+
+    describe('#previousPage', function() {
+      const previousPage = page.previousPage();
+
+      it('is CalendarPage', function() {
+        assert.equal(previousPage instanceof CalendarPage, true);
+      });
+
+      it('memoized for page', function() {
+        assert.equal(previousPage === previousPage, true);
+      });
+
+      describe('#allDates', function() {
+        const dates = previousPage.allDates;
+
+        it('is Array', function() {
+          assert.equal(Array.isArray(dates), true);
+        });
+
+        it('with length 35', function() {
+          assert.equal(dates.length, 35);
+        });
+
+        it('with first element date is 2018-01-01', function() {
+          const firstDateFormated = dates[0].toISOString().slice(0, 10);
+          assert.equal(firstDateFormated, '2018-01-01');
+        });
+
+        it('with last element date is 2018-02-04', function() {
+          const lastDateFormated = dates[dates.length - 1].toISOString().slice(0, 10);
+          assert.equal(lastDateFormated, '2018-02-04');
+        });
+      });
+    });
   });
 });

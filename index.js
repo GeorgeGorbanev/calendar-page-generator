@@ -1,6 +1,6 @@
 const ONE_DAY = 1000 * 60 * 60 * 24;
 
-const generatePreviousMonthDates = function (year, month) {
+const previousMonthDates = function (year, month) {
   const firstMonthDay = new Date(year, month, 1, 12);
   let dates = [];
   if (firstMonthDay.getDay() !== 1) {
@@ -15,7 +15,7 @@ const generatePreviousMonthDates = function (year, month) {
   return dates;
 };
 
-const generateCurrentMonthDates = function (year, month) {
+const currentMonthDates = function (year, month) {
   const firstMonthDay = new Date(year, month, 1, 12);
   let dates = [firstMonthDay];
   let nextDay = firstMonthDay;
@@ -31,7 +31,7 @@ const generateCurrentMonthDates = function (year, month) {
   return dates;
 };
 
-const generateNextMonthDates = function (year, month) {
+const nextMonthDates = function (year, month) {
   let dates = [];
   let nextDay = new Date(year, month + 1, 1, 12);
   if (nextDay.getDay() !== 1) {
@@ -51,12 +51,35 @@ const generateNextMonthDates = function (year, month) {
 
 class CalendarPage {
   constructor(date) {
+    this.initDate = date;
     this.year = date.getFullYear();
     this.month = date.getMonth();
-    this.previousDates = generatePreviousMonthDates(this.year, this.month);
-    this.currentDates = generateCurrentMonthDates(this.year, this.month);
-    this.nextDates = generateNextMonthDates(this.year, this.month);
-    this.allDates = [].concat(this.previousDates).concat(this.currentDates).concat(this.nextDates);
+
+    this.previousDates = previousMonthDates(this.year, this.month);
+    this.currentDates = currentMonthDates(this.year, this.month);
+    this.nextDates = nextMonthDates(this.year, this.month);
+
+    this.allDates = [];
+    this.allDates = this.allDates.concat(this.previousDates);
+    this.allDates = this.allDates.concat(this.currentDates);
+    this.allDates = this.allDates.concat(this.nextDates);
+
+    this.memo = {};
+  }
+
+  previousPage() {
+    const memoized = this.memo['previousPage'];
+
+    if (typeof memoized !== 'undefined') {
+      return memoized;
+    }
+
+    let initDate = new Date(this.initDate);
+    let currentMonth = initDate.getMonth();
+    initDate.setMonth(currentMonth - 1);
+
+    this.memo['previousPage'] = new CalendarPage(initDate);
+    return this.memo['previousPage'];
   }
 }
 
