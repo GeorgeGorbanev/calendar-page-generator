@@ -1,21 +1,21 @@
 {
-  "name": "calendar-page-generator",
+  "name": "calendar-page",
   "version": "0.0.1",
-  "description": "",
+  "description": "Generate arrays of dates for calendar pages, that is a table (7x5), includes all month dates and closest months dates.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeorgeGorbanev/calendar-page-generator.git"
+    "url": "git+https://github.com/GeorgeGorbanev/calendar-page-js.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GeorgeGorbanev/calendar-page-generator/issues"
+    "url": "https://github.com/GeorgeGorbanev/calendar-page--js/issues"
   },
-  "homepage": "https://github.com/GeorgeGorbanev/calendar-page-generator#readme",
+  "homepage": "https://github.com/GeorgeGorbanev/calendar-page-js#readme",
   "devDependencies": {
     "eslint": "^4.15.0",
     "mocha": "^4.1.0"

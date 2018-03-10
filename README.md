@@ -1,4 +1,6 @@
-# calendar-page-generator
+# calendar-page-js
+
+![BuildStatus](https://travis-ci.org/GeorgeGorbanev/calendar-page-js.png)
 
 Generate arrays of dates for calendar pages.
 Calendar page is a table (7x5), includes all month dates and closest months dates.
@@ -16,26 +18,45 @@ Mon Tue Wed Thu Fri Sut Sun
 29  30  31  01  02  03  04
 ```
 
-Where every cell is a date.
+Where every cell is a Date instance.
 
-## Development
 
-1) Install dependencies:
+## Usage
 
-```
-$ npm install
-```
-
-2) Make your changes.
-
-3) Test it:
+Install package:
 
 ```
-$ npm test
+npm install calendar-page
 ```
 
-4) Run ESLint:
+Require class:
 
+``` Javascript
+const CalendarPage = require('../index.js');
 ```
-$ ./node_modules/.bin/eslint index.js
+
+Create date instance and pass it to `CalendarPage` constructor:
+
+``` Javascript
+let date = new Date(2018, 1, 1);        // Feb 2018
+let page = new CalendarPage(date);
+```
+Keys `allDates`, `previousDates`, `currentDates` and `nextDates` will contain arrays of dates:
+
+``` Javascript
+console.log(page.previousDates.length); // January dates on page
+// 3
+console.log(page.currentDates.length);  // February dates on page
+// 28
+console.log(page.nextDates.length);     // March dates on page
+// 4
+console.log(page.allDates.length);      // All dates on page
+// 35
+```
+
+Methods `#previousPage()` and `#nextPage()` will return `CalendarPage` objects for previous and next months. Also it will memoize calls:
+
+``` Javascript
+(page.previousPage() === page.previousPage()); // true
+(page.previousPage() instanceof CalendarPage); // true
 ```
